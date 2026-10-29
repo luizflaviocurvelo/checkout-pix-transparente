@@ -1,0 +1,8 @@
+'use client';
+import {useState} from 'react';
+export default function Home(){
+ const [nome,setNome]=useState(''); const [email,setEmail]=useState(''); const [cpf,setCpf]=useState(''); const [whats,setWhats]=useState('');
+ return <main className="wrap"><header><span className="brand">◈</span><div><strong>Checkout Pix Transparente</strong><small>Ambiente de pagamento em preparação</small></div></header>
+ <section className="card"><span className="tag">Integração em configuração</span><h1>Finalizar compra</h1><p className="muted">Estamos preparando o pagamento seguro por Pix com Mercado Pago.</p><div className="price"><span>Valor do teste</span><strong>R$ 0,07</strong></div>
+ <form onSubmit={e=>e.preventDefault()}><label>Nome completo<input value={nome} onChange={e=>setNome(e.target.value)} placeholder="Seu nome" autoComplete="name"/></label><label>E-mail<input value={email} onChange={e=>setEmail(e.target.value)} type="email" placeholder="voce@exemplo.com" autoComplete="email"/></label><label>CPF<input value={cpf} onChange={e=>setCpf(e.target.value)} inputMode="numeric" placeholder="000.000.000-00"/></label><label>WhatsApp com DDD<input value={whats} onChange={e=>setWhats(e.target.value)} inputMode="tel" placeholder="(11) 99999-9999" autoComplete="tel"/></label><label className="consent"><input type="checkbox" disabled/> <span>Concordo em receber pelo WhatsApp informações relacionadas à minha compra (disponível após ativação).</span></label><button type="button" disabled>Gerar Pix — em breve</button></form><p className="note">Nenhum pagamento está sendo solicitado nesta etapa. Os dados digitados não são enviados nem armazenados.</p></section><footer>Checkout em preparação · Integração Mercado Pago</footer></main>
+}

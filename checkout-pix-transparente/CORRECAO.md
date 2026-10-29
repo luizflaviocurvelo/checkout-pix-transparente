@@ -1,0 +1,1 @@
+Correção: window.open com noopener pode retornar null mesmo abrindo a aba. O redirecionamento agora é agendado independentemente do retorno. Se o navegador bloquear pop-ups, o comprador poderá precisar permitir a abertura do WhatsApp.

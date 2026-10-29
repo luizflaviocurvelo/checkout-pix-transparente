@@ -1,22 +1,22 @@
-# Checkout Pix Transparente — versão inicial para obter URL
+# Checkout Pix Transparente — integração inicial Orders
 
-Este projeto Next.js publica uma página inicial responsiva na Vercel para informar sua URL ao Mercado Pago Developers. **Não processa pagamentos ainda.** O botão Pix está intencionalmente desabilitado e o formulário não transmite nem armazena dados.
+Versão para **validação técnica controlada** do Pix real no Mercado Pago. **Não liberar ao público ainda.** Usa a API de Orders `/v1/orders`, com valor fixo no servidor de R$ 0,07. O Mercado Pago pode rejeitar valores inferiores ao mínimo aceito ou exigir ajustes de payload.
 
-## Publicar
-1. Extraia o ZIP.
-2. Crie um repositório novo no GitHub (por exemplo, `checkout-pix-transparente`).
-3. Envie os arquivos **da pasta do projeto** ao repositório, incluindo `app`, `package.json`, `.gitignore` e `README.md`. Não envie credenciais.
-4. Na Vercel, selecione Add New → Project → Import Git Repository.
-5. Selecione o repositório e mantenha a configuração padrão Next.js; clique em Deploy.
-6. Copie a URL real `https://...vercel.app` gerada e informe-a no campo de site do Mercado Pago.
+## Atualizar o mesmo GitHub
+Extraia o ZIP e envie os arquivos para a **raiz do repositório existente**, substituindo os anteriores. Não crie novo projeto. A Vercel deve fazer novo deploy após o commit.
 
-## Próximas fases (não implementadas nesta versão)
-- Confirmar na documentação atual a compatibilidade da aplicação Orders com o componente oficial de checkout desejado.
-- Criar endpoint de cobrança Pix no servidor, usando Access Token de produção em variável privada da Vercel.
-- Verificar valor mínimo aceito para R$ 0,07 antes de cobrar.
-- Validar webhook e consultar status diretamente no Mercado Pago.
-- Salvar compras no Supabase com prevenção de duplicidade.
-- Enviar mensagem transacional pelo WhatsApp Cloud API com consentimento e template aprovado.
-- Aplicar LGPD, validações, rate limiting, proteção de segredos e monitoramento antes de produção.
+## Variável na Vercel
+`MERCADOPAGO_ACCESS_TOKEN` — somente no ambiente Production, nunca `NEXT_PUBLIC_`. Faça redeploy após modificar variáveis.
 
-**Nunca coloque o Access Token no GitHub, em variáveis NEXT_PUBLIC_ ou em capturas de tela.**
+## Como testar
+1. Confirme que a rota `/api/pix` existe no deploy (não abra diretamente: aceita apenas POST).
+2. Abra o checkout e use dados próprios reais para o teste autorizado. Não publique o link para clientes ainda.
+3. Se houver erro, confira os logs de funções da Vercel. Um erro de valor mínimo exige rever o valor, não tentar contornar a restrição.
+4. Se a API retornar o QR Code, valide o pagamento no painel do Mercado Pago. O status mostrado na tela é apenas informativo.
+
+## Limitações importantes
+- A tela atual é um formulário próprio; **não é o Payment Brick oficial**. Precisamos verificar a compatibilidade exata do Payment Brick com a aplicação Orders antes de substituí-lo.
+- A rota `/api/webhook` é um placeholder: **não valida assinatura e não deve ser cadastrada como webhook de produção ainda**.
+- Ainda não há Supabase, WhatsApp, idempotência persistente, fila de mensagens, proteção contra abuso/rate limit, nem política LGPD. **Não lançar comercialmente** antes disso.
+- O endpoint de status consulta a API do Mercado Pago; não deve ser utilizado para conceder acesso sem verificação no servidor e registro no banco.
+- O valor de R$ 0,07 pode não ser permitido em produção.

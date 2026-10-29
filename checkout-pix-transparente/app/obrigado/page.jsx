@@ -1,2 +1,19 @@
 'use client';
-export default function Obrigado(){return <main style={{minHeight:'100vh',display:'grid',placeItems:'center',padding:24,background:'#f3f7f5',fontFamily:'Arial,sans-serif'}}><section style={{maxWidth:560,width:'100%',background:'white',borderRadius:20,padding:36,textAlign:'center',boxShadow:'0 12px 36px #153b2720'}}><div style={{fontSize:54}}>🎉</div><h1 style={{color:'#176d42'}}>Obrigado pela sua compra!</h1><p>Seu pagamento foi confirmado com sucesso.</p><p>Agradecemos pela confiança! Em breve, você receberá as orientações para acessar seu curso.</p><a href="/" style={{display:'inline-block',padding:'14px 24px',background:'#176d42',color:'#fff',borderRadius:10,textDecoration:'none',marginTop:16}}>Voltar ao início</a></section><a href={'https://wa.me/5513991496597?text='+encodeURIComponent('Olá! Gostaria de falar com o vendedor sobre minha compra.')} target="_blank" rel="noopener noreferrer" aria-label="Falar com o vendedor pelo WhatsApp" style={{position:'fixed',right:20,bottom:20,background:'#25D366',color:'#fff',padding:'15px 19px',borderRadius:40,textDecoration:'none',fontWeight:700,boxShadow:'0 5px 18px #0003'}}>✆ WhatsApp</a></main>}
+
+export default function Obrigado() {
+  const mensagem = encodeURIComponent('Olá! Gostaria de falar com o vendedor sobre minha compra.');
+  const whatsapp = `https://wa.me/5513991496597?text=${mensagem}`;
+
+  return (
+    <main style={{minHeight:'100vh',background:'#f3f6fa',fontFamily:'Arial, sans-serif',padding:'28px 16px',display:'flex',justifyContent:'center',alignItems:'center'}}>
+      <section style={{background:'#fff',borderRadius:20,maxWidth:900,width:'100%',padding:24,textAlign:'center',boxShadow:'0 10px 30px #0001'}}>
+        <h1 style={{color:'#087443'}}>Obrigado pela sua compra!</h1>
+        <p>Seu pagamento foi confirmado com sucesso.</p>
+        <img src="/imagem-obrigado.png" alt="Arte sobre liberdade, justiça e Constituição" style={{display:'block',width:'100%',height:'auto',borderRadius:12,margin:'24px auto'}} />
+        <p>Em breve, você receberá as orientações para acessar seu curso.</p>
+        <a href="/" style={{display:'inline-block',background:'#0879df',color:'#fff',padding:'14px 24px',borderRadius:10,textDecoration:'none',marginTop:12}}>Voltar ao início</a>
+      </section>
+      <a href={whatsapp} target="_blank" rel="noopener noreferrer" aria-label="Falar com o vendedor pelo WhatsApp" style={{position:'fixed',bottom:24,right:24,background:'#25D366',color:'#fff',borderRadius:50,padding:'15px 20px',textDecoration:'none',fontWeight:'bold',boxShadow:'0 5px 20px #0003'}}>WhatsApp</a>
+    </main>
+  );
+}
